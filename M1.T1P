@@ -1,0 +1,47 @@
+
+// pin for the motionsensorpin
+const int motionPin = 2;
+
+// pin for the led
+const int ledPin = 13;
+
+// Variable to store the motion sensor state
+int motionState = LOW;
+
+// serial communication
+void setup() {
+  
+  Serial.begin(9600);
+  
+  // Set the motion sensor pin as input
+  pinMode(motionPin, INPUT);
+  
+  // Sets up the LED pin as output.
+  pinMode(ledPin, OUTPUT);
+  
+  // Initially turns off the LED.
+  digitalWrite(ledPin, LOW);
+}
+
+void loop() {
+  // read state of motion sensor
+  motionState = digitalRead(motionPin);
+  
+  // prints motion sensor state
+  Serial.print("The Motion Sensor State is currently: ");
+  Serial.println(motionState);
+  
+  // Check if motion is detected
+  if (motionState == HIGH) {
+    // If there is Motion detected turns on the LED
+    digitalWrite(ledPin, HIGH);
+    Serial.println("ON");
+  } else {
+    // If there is No motion, it turns off the LED
+    digitalWrite(ledPin, LOW);
+    Serial.println("OFF");
+  }
+  
+  // Delay to remove clogging
+  delay(1000);
+}
